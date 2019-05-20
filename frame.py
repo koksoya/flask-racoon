@@ -7,27 +7,19 @@ class Frames:
     def __init__(self):
         self.column = ['point_of_interest', 'finance', 'store', 'supermarket',
                   'clothing_store', 'label']
-        self.bornova = self.retrieve(self,"bornova")
-        self.buca = self.retrieve(self,"buca")
-        self.konak = self.retrieve(self,"konak")
-        
+        self.store = {}
+        self.bornova = self.retrieve("bornova")
+        self.buca = self.retrieve("buca")
+        self.konak = self.retrieve("konak")
 
-    @staticmethod
-    def column_equalizer_dropper(column, stores):
-        drop_from_stores = set(stores.columns)-set(column)
-        stores.drop(columns=list(drop_from_stores), inplace=True)
-        add_to_stores = set(column)-set(stores.columns)
-        for column in add_to_stores:
-            if(column != "label"):
-                stores[column] = 0
-        
     
-    @staticmethod
     def retrieve(self,district):
         r = requests.get(
             "https://refined-cheer.firebaseio.com/"+district+".json")
         jsonObject = json.loads(r.text)
         my_dict = my_dictionary()
+
+        self.store[district] = jsonObject
 
         for key in jsonObject.keys():
             element = jsonObject[key]
@@ -45,7 +37,13 @@ class Frames:
         
         return dynamicFrame[predictions==1].index
         
-
+    def column_equalizer_dropper(self, column, stores):
+        drop_from_stores = set(stores.columns)-set(column)
+        stores.drop(columns=list(drop_from_stores), inplace=True)
+        add_to_stores = set(column)-set(stores.columns)
+        for column in add_to_stores:
+            if(column != "label"):
+                stores[column] = 0
 
 class my_dictionary(dict):
 
@@ -56,3 +54,4 @@ class my_dictionary(dict):
     # Function to add key:value
     def add(self, key, value):
         self[key] = value
+
