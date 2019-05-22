@@ -6,7 +6,7 @@ from frame import Frames
 ex = {
   "frame": Frames() 
 }
-
+#dsgdksjahıljasldj
 app = Flask(__name__)
 CORS(app)
 @app.route("/predict",methods=['GET'])
@@ -52,4 +52,3 @@ def set_interval(func, sec):
 if __name__ == "__main__":
   set_interval(refresh_frame,3600*24)
   app.run()
-    
