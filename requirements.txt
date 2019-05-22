@@ -1,5 +1,4 @@
 alabaster==0.7.12
-anaconda-client==1.7.2
 anaconda-navigator==1.9.7
 anaconda-project==0.8.2
 asn1crypto==0.24.0
@@ -130,6 +129,7 @@ py==1.8.0
 pycodestyle==2.5.0
 pycosat==0.6.3
 pycparser==2.19
+pycrypto==2.6.1
 pycurl==7.43.0.2
 pyflakes==2.1.1
 Pygments==2.4.0
