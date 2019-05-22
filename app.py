@@ -2,6 +2,7 @@ import threading
 from flask import Flask,jsonify,request
 from flask_cors import CORS
 from frame import Frames
+import os
 
 ex = {
   "frame": Frames() 
@@ -50,5 +51,6 @@ def set_interval(func, sec):
     return t
 
 if __name__ == "__main__":
-  set_interval(refresh_frame,3600*24)
-  app.run()
+    set_interval(refresh_frame,3600*24)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(debug=False, host='0.0.0.0', port=port)
